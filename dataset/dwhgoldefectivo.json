@@ -1,0 +1,51 @@
+{
+	"name": "dwhgoldefectivo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWH destino",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_efectivo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ci",
+				"type": "nvarchar"
+			},
+			{
+				"name": "genero",
+				"type": "nvarchar"
+			},
+			{
+				"name": "departamento_origen",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_nacimiento",
+				"type": "date"
+			},
+			{
+				"name": "fecha_ingreso",
+				"type": "date"
+			},
+			{
+				"name": "estado",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "gold",
+			"table": "Dim_Efectivo"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

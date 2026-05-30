@@ -1,0 +1,40 @@
+{
+	"name": "silver_sink_rangos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWH destino",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_rango",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "categoria",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nivel_jerarquico",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "abreviatura",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "silver",
+			"table": "tbl_rangos"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,43 @@
+{
+	"name": "dwhgoldzonaop",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWH destino",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_zona",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "departamento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "frontera_con",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_terreno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nivel_riesgo",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "gold",
+			"table": "Dim_Zona_Operacion"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

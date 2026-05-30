@@ -1,0 +1,70 @@
+{
+	"name": "bronze_sink_efectivos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWH destino",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_efectivo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_especialidad",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_unidad_actual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_rango_actual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ci",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_nacimiento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "genero",
+				"type": "nvarchar"
+			},
+			{
+				"name": "departamento_origen",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_ingreso",
+				"type": "nvarchar"
+			},
+			{
+				"name": "estado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "salario_mensual",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "bronze",
+			"table": "tbl_efectivos"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

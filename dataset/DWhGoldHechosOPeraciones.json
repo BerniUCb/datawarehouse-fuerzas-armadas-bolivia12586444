@@ -1,0 +1,80 @@
+{
+	"name": "DWhGoldHechosOPeraciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWH destino",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_operacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_tipo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_unidad_resp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_zona",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_tiempo_inicio",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_tiempo_fin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "efectivos_desplegados",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "vehiculos_utilizados",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "duracion_dias",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "costo_operacion",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "detenidos",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "area_km2",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "gold",
+			"table": "Hechos_Operacion"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

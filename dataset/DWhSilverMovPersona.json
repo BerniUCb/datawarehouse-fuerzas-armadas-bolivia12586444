@@ -1,0 +1,62 @@
+{
+	"name": "DWhSilverMovPersona",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWH destino",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_movimiento",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_efectivo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_unidad_destino",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_rango",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_tipo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "fecha_movimiento",
+				"type": "date"
+			},
+			{
+				"name": "antiguedad_anios",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "salario_mensual",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "observaciones",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "silver",
+			"table": "tbl_movimientos_personal"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,562 @@
+{
+	"name": "df_silver_limpiar_datos",
+	"properties": {
+		"folder": {
+			"name": "silver"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "bronze_efectivos",
+						"type": "DatasetReference"
+					},
+					"name": "srcefectivos"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_movimientos_personal",
+						"type": "DatasetReference"
+					},
+					"name": "srcMovimientosPersonal"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_operaciones",
+						"type": "DatasetReference"
+					},
+					"name": "srroperacon"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_zonas",
+						"type": "DatasetReference"
+					},
+					"name": "srzonas"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_rangos",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_especialidades",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_tipos_movimiento",
+						"type": "DatasetReference"
+					},
+					"name": "source3"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_tipos_operacion",
+						"type": "DatasetReference"
+					},
+					"name": "source4"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_unidades",
+						"type": "DatasetReference"
+					},
+					"name": "source5"
+				},
+				{
+					"dataset": {
+						"referenceName": "bronze_estructura_organizacional",
+						"type": "DatasetReference"
+					},
+					"name": "source6"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dw_silver_efectivo",
+						"type": "DatasetReference"
+					},
+					"name": "inkefectivos"
+				},
+				{
+					"dataset": {
+						"referenceName": "dw_silver_movimientos_personal",
+						"type": "DatasetReference"
+					},
+					"name": "sinkmovimientospersonal"
+				},
+				{
+					"dataset": {
+						"referenceName": "dwsilverop",
+						"type": "DatasetReference"
+					},
+					"name": "sinkop"
+				},
+				{
+					"dataset": {
+						"referenceName": "dwhsilverzonas",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "silver_sink_rangos",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				},
+				{
+					"dataset": {
+						"referenceName": "silver_sink_especialidades",
+						"type": "DatasetReference"
+					},
+					"name": "sink3"
+				},
+				{
+					"dataset": {
+						"referenceName": "silver_sink_tipos_movimiento",
+						"type": "DatasetReference"
+					},
+					"name": "sink4"
+				},
+				{
+					"dataset": {
+						"referenceName": "silver_sink_tipos_operacion",
+						"type": "DatasetReference"
+					},
+					"name": "sink5"
+				},
+				{
+					"dataset": {
+						"referenceName": "silver_sink_unidades",
+						"type": "DatasetReference"
+					},
+					"name": "sink6"
+				},
+				{
+					"dataset": {
+						"referenceName": "silver_sink_estructura_organizacional",
+						"type": "DatasetReference"
+					},
+					"name": "sink7"
+				}
+			],
+			"transformations": [
+				{
+					"name": "cleanefectivos"
+				},
+				{
+					"name": "cleanmovimientospersonal"
+				},
+				{
+					"name": "cleanop"
+				},
+				{
+					"name": "cleanzonas"
+				},
+				{
+					"name": "cleanrangos"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "derivedColumn4"
+				},
+				{
+					"name": "derivedColumn5"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id_efectivo as integer,",
+				"          id_especialidad as integer,",
+				"          id_unidad_actual as integer,",
+				"          id_rango_actual as integer,",
+				"          nombre as string,",
+				"          ci as string,",
+				"          fecha_nacimiento as string,",
+				"          genero as string,",
+				"          departamento_origen as string,",
+				"          fecha_ingreso as string,",
+				"          estado as string,",
+				"          salario_mensual as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> srcefectivos",
+				"source(output(",
+				"          id_movimiento as integer,",
+				"          id_efectivo as integer,",
+				"          id_unidad_destino as integer,",
+				"          id_rango as integer,",
+				"          id_tipo as integer,",
+				"          fecha_movimiento as string,",
+				"          antiguedad_anios as string,",
+				"          salario_mensual as string,",
+				"          observaciones as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> srcMovimientosPersonal",
+				"source(output(",
+				"          id_operacion as integer,",
+				"          id_tipo as integer,",
+				"          id_unidad_resp as integer,",
+				"          id_zona as integer,",
+				"          nombre_operacion as string,",
+				"          fecha_inicio as string,",
+				"          fecha_fin as string,",
+				"          efectivos_desplegados as string,",
+				"          vehiculos_utilizados as string,",
+				"          duracion_dias as string,",
+				"          costo_operacion as string,",
+				"          resultado as string,",
+				"          detenidos as string,",
+				"          area_km2 as string,",
+				"          incidentes as string,",
+				"          observaciones as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> srroperacon",
+				"source(output(",
+				"          id_zona as integer,",
+				"          nombre as string,",
+				"          departamento as string,",
+				"          frontera_con as string,",
+				"          tipo_terreno as string,",
+				"          altitud_msnm as integer,",
+				"          nivel_riesgo as string,",
+				"          acceso_carretero as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> srzonas",
+				"source(output(",
+				"          id_rango as integer,",
+				"          nombre as string,",
+				"          categoria as string,",
+				"          nivel_jerarquico as integer,",
+				"          abreviatura as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source(output(",
+				"          id_especialidad as integer,",
+				"          nombre as string,",
+				"          area as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"source(output(",
+				"          id_tipo as integer,",
+				"          nombre as string,",
+				"          descripcion as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source3",
+				"source(output(",
+				"          id_tipo as integer,",
+				"          nombre as string,",
+				"          categoria as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source4",
+				"source(output(",
+				"          id_unidad as integer,",
+				"          id_brigada as integer,",
+				"          nombre as string,",
+				"          codigo as string,",
+				"          ciudad as string,",
+				"          departamento as string,",
+				"          tipo_cuartel as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source5",
+				"source(output(",
+				"          id_estructura as integer,",
+				"          id_padre as integer,",
+				"          nivel as string,",
+				"          nombre as string,",
+				"          sigla as string,",
+				"          tipo as string,",
+				"          cobertura_departamentos as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source6",
+				"srcefectivos derive(nombre = trim(upper(nombre)),",
+				"          ci = trim(ci),",
+				"          genero = case(   upper(trim(regexReplace(genero, '[^A-Za-z]', ''))) == 'MASCULINO' ||    upper(trim(regexReplace(genero, '[^A-Za-z]', ''))) == 'MASC' ||    upper(trim(regexReplace(genero, '[^A-Za-z]', ''))) == 'M' ||    upper(trim(regexReplace(genero, '[^A-Za-z]', ''))) == 'HOMBRE' ||    upper(trim(regexReplace(genero, '[^A-Za-z]', ''))) == 'H', 'MASCULINO',   upper(trim(regexReplace(genero, '[^A-Za-z]', ''))) == 'FEMENINO' ||    upper(trim(regexReplace(genero, '[^A-Za-z]', ''))) == 'FEM' ||    upper(trim(regexReplace(genero, '[^A-Za-z]', ''))) == 'F' ||    upper(trim(regexReplace(genero, '[^A-Za-z]', ''))) == 'MUJER', 'FEMENINO',   'NO ESPECIFICADO' ),",
+				"          departamento_origen = case(   in(['LA PAZ','LAPAZ','LP','L.P.','LA  PAZ'], upper(trim(departamento_origen))), 'LA PAZ',   in(['COCHABAMBA','CBBA','CBBA.','CBBA'], upper(trim(departamento_origen))), 'COCHABAMBA',   in(['SANTA CRUZ','SCZ','SC','STA. CRUZ','STA CRUZ','STA.CRUZ'], upper(trim(departamento_origen))), 'SANTA CRUZ',   in(['ORURO','OR','OR.'], upper(trim(departamento_origen))), 'ORURO',   in(['POTOSI','POTOSI'], upper(trim(departamento_origen))), 'POTOSI',   in(['TARIJA','TJ','TJ.'], upper(trim(departamento_origen))), 'TARIJA',   in(['BENI','BN','BN.'], upper(trim(departamento_origen))), 'BENI',   in(['PANDO','PN','PN.','PT','PT.'], upper(trim(departamento_origen))), 'PANDO',   in(['CHUQUISACA','CHQ','CHQ.','SUCRE'], upper(trim(departamento_origen))), 'CHUQUISACA',   'NO ESPECIFICADO' ),",
+				"          estado = trim(upper(estado)),",
+				"          fecha_nacimiento = toDate(fecha_nacimiento),",
+				"          fecha_ingreso = toDate(fecha_ingreso),",
+				"          salario_mensual = toDecimal(salario_mensual)) ~> cleanefectivos",
+				"srcMovimientosPersonal derive(observaciones = trim(upper(observaciones)),",
+				"          fecha_movimiento = toDate(fecha_movimiento),",
+				"          antiguedad_anios = toInteger(antiguedad_anios),",
+				"          salario_mensual = toDecimal(salario_mensual)) ~> cleanmovimientospersonal",
+				"srroperacon derive(nombre_operacion = trim(upper(nombre_operacion)),",
+				"          fecha_inicio = toDate(fecha_inicio),",
+				"          fecha_fin = toDate(fecha_fin),",
+				"          efectivos_desplegados = toInteger(efectivos_desplegados),",
+				"          vehiculos_utilizados = toInteger(vehiculos_utilizados),",
+				"          duracion_dias = toInteger(duracion_dias),",
+				"          costo_operacion = toDecimal(costo_operacion),",
+				"          detenidos = toInteger(detenidos),",
+				"          area_km2 = toDecimal(area_km2),",
+				"          resultado = case(   in(['COMPLETADA','CONCLUIDA','FINALIZADA','EXITOSA','EXITOSO','EXITO','SI, EXITOSA','OBJETIVO CUMPLIDO','LOGRADO','SATISFACTORIO','FAVORABLE','RESULTADO POSITIVO','POSITIVO','BUENO','MUY BUENO','ACEPTABLE','REGULAR'], upper(trim(resultado))), 'EXITOSA',   in(['FALLIDA','NEGATIVO','SIN EXITO','INCONCLUSA','INCOMPLETA','NO LOGRADO','SIN RESULTADOS','SIN RESULTADOS CONCRETOS'], upper(trim(resultado))), 'FALLIDA',   in(['EN PROCESO','EN CURSO','PARCIAL','PARCIALMENTE EXITOSA','PARCIALMENTE EXITOSO','PARCIALMENTE LOGRADO','PENDIENTE DE EVALUACION','POR EVALUAR'], upper(trim(resultado))), 'EN PROCESO',   'NO REPORTADO' )) ~> cleanop",
+				"srzonas derive(nombre = trim(upper(nombre)),",
+				"          departamento = trim(upper(departamento)),",
+				"          frontera_con = trim(upper(frontera_con)),",
+				"          tipo_terreno = trim(upper(tipo_terreno)),",
+				"          nivel_riesgo = trim(upper(nivel_riesgo)),",
+				"          altitud_msnm = toInteger(altitud_msnm)) ~> cleanzonas",
+				"source1 derive(nombre = trim(upper(nombre)),",
+				"          categoria = trim(upper(categoria)),",
+				"          abreviatura = trim(upper(abreviatura))) ~> cleanrangos",
+				"source2 derive(nombre = trim(upper(nombre)),",
+				"          area = trim(upper(area))) ~> derivedColumn1",
+				"source3 derive(nombre = trim(upper(nombre)),",
+				"          descripcion = trim(upper(descripcion))) ~> derivedColumn2",
+				"source4 derive(nombre = trim(upper(nombre)),",
+				"          categoria = trim(upper(categoria))) ~> derivedColumn3",
+				"source5 derive(nombre = trim(upper(nombre)),",
+				"          codigo = trim(upper(codigo)),",
+				"          ciudad = trim(upper(ciudad)),",
+				"          departamento = trim(upper(departamento)),",
+				"          tipo_cuartel = trim(upper(tipo_cuartel))) ~> derivedColumn4",
+				"source6 derive(nivel = trim(upper(nivel)),",
+				"          nombre = trim(upper(nombre)),",
+				"          sigla = trim(upper(sigla)),",
+				"          tipo = trim(upper(tipo)),",
+				"          cobertura_departamentos = trim(upper(cobertura_departamentos))) ~> derivedColumn5",
+				"cleanefectivos sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_efectivo as integer,",
+				"          id_especialidad as integer,",
+				"          id_unidad_actual as integer,",
+				"          id_rango_actual as integer,",
+				"          nombre as string,",
+				"          ci as string,",
+				"          fecha_nacimiento as date,",
+				"          genero as string,",
+				"          departamento_origen as string,",
+				"          fecha_ingreso as date,",
+				"          estado as string,",
+				"          salario_mensual as decimal(18,2)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> inkefectivos",
+				"cleanmovimientospersonal sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_movimiento as integer,",
+				"          id_efectivo as integer,",
+				"          id_unidad_destino as integer,",
+				"          id_rango as integer,",
+				"          id_tipo as integer,",
+				"          fecha_movimiento as date,",
+				"          antiguedad_anios as integer,",
+				"          salario_mensual as decimal(18,2),",
+				"          observaciones as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkmovimientospersonal",
+				"cleanop sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_operacion as integer,",
+				"          id_tipo as integer,",
+				"          id_unidad_resp as integer,",
+				"          id_zona as integer,",
+				"          nombre_operacion as string,",
+				"          fecha_inicio as date,",
+				"          fecha_fin as date,",
+				"          efectivos_desplegados as integer,",
+				"          vehiculos_utilizados as integer,",
+				"          duracion_dias as integer,",
+				"          costo_operacion as decimal(18,2),",
+				"          resultado as string,",
+				"          detenidos as integer,",
+				"          area_km2 as decimal(18,2),",
+				"          incidentes as string,",
+				"          observaciones as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkop",
+				"cleanzonas sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_zona as integer,",
+				"          nombre as string,",
+				"          departamento as string,",
+				"          frontera_con as string,",
+				"          tipo_terreno as string,",
+				"          altitud_msnm as integer,",
+				"          nivel_riesgo as string,",
+				"          acceso_carretero as boolean",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+				"cleanrangos sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_rango as integer,",
+				"          nombre as string,",
+				"          categoria as string,",
+				"          nivel_jerarquico as integer,",
+				"          abreviatura as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_especialidad as integer,",
+				"          nombre as string,",
+				"          area as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink3",
+				"derivedColumn2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_tipo as integer,",
+				"          nombre as string,",
+				"          descripcion as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink4",
+				"derivedColumn3 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_tipo as integer,",
+				"          nombre as string,",
+				"          categoria as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink5",
+				"derivedColumn4 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_unidad as integer,",
+				"          id_brigada as integer,",
+				"          nombre as string,",
+				"          codigo as string,",
+				"          ciudad as string,",
+				"          departamento as string,",
+				"          tipo_cuartel as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink6",
+				"derivedColumn5 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id_estructura as integer,",
+				"          id_padre as integer,",
+				"          nivel as string,",
+				"          nombre as string,",
+				"          sigla as string,",
+				"          tipo as string,",
+				"          cobertura_departamentos as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink7"
+			]
+		}
+	}
+}

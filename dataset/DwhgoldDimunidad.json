@@ -1,0 +1,51 @@
+{
+	"name": "DwhgoldDimunidad",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWH destino",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_unidad",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "codigo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ciudad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "departamento",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo_cuartel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_brigada",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre_division",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "gold",
+			"table": "Dim_Unidad"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

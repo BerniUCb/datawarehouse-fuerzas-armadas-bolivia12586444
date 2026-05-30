@@ -1,0 +1,48 @@
+{
+	"name": "silver_sink_estructura_organizacional",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWH destino",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_estructura",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_padre",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nivel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nombre",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sigla",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tipo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cobertura_departamentos",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "silver",
+			"table": "tbl_estructura_organizacional"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

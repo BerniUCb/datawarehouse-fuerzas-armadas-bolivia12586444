@@ -1,0 +1,15 @@
+{
+	"name": "adf-sisger-ffaa-1258644",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "chilecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "aad60ecc-5e6d-421e-95c0-3284aa95eba8",
+		"tenantId": "cc28633f-12b8-46cb-bc15-951dae239b4d"
+	}
+}

@@ -1,0 +1,86 @@
+{
+	"name": "bronzetbloperaciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWH destino",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id_operacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_tipo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_unidad_resp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "id_zona",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "nombre_operacion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_inicio",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fecha_fin",
+				"type": "nvarchar"
+			},
+			{
+				"name": "efectivos_desplegados",
+				"type": "nvarchar"
+			},
+			{
+				"name": "vehiculos_utilizados",
+				"type": "nvarchar"
+			},
+			{
+				"name": "duracion_dias",
+				"type": "nvarchar"
+			},
+			{
+				"name": "costo_operacion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "resultado",
+				"type": "nvarchar"
+			},
+			{
+				"name": "detenidos",
+				"type": "nvarchar"
+			},
+			{
+				"name": "area_km2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "incidentes",
+				"type": "nvarchar"
+			},
+			{
+				"name": "observaciones",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "bronze",
+			"table": "tbl_operaciones"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

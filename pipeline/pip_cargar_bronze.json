@@ -1,0 +1,34 @@
+{
+	"name": "pip_cargar_bronze",
+	"properties": {
+		"activities": [
+			{
+				"name": "df_bronze_cargar_datos",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_bronze_cargar_datos",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-06-07T06:48:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

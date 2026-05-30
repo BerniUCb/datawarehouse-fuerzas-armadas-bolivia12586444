@@ -1,0 +1,18 @@
+{
+	"name": "OLP DE ORIGEN",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "BD del docente Franklin",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "server02-fuerzas-armadas-bolivia.database.windows.net",
+			"database": "erp-fuerzas-armadas-bolivia-2",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "userSisGer",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDFEODA1QTBBLThFODctNEVFNi1BMzNFLTA4NTZGNUNBMzlGQV83NWZmNzA1OC04YWNiLTRjZWItOWY1Yy00YTg3ZDUwN2E5NDAiDQp9"
+		}
+	}
+}
