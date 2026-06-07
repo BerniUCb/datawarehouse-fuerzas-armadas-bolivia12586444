@@ -1,0 +1,138 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Nombre de instancia de Data Factory",
+			"defaultValue": "adf-sisger-ffaa-1258644"
+		},
+		"DWH destino_password": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"password\"de \"DWH destino\""
+		},
+		"OLP DE ORIGEN_password": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"password\"de \"OLP DE ORIGEN\""
+		},
+		"DWH destino_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-sisger-ffaa-1258644.database.windows.net"
+		},
+		"DWH destino_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "dw-fuerzas-armadas"
+		},
+		"DWH destino_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminffaa"
+		},
+		"OLP DE ORIGEN_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "server02-fuerzas-armadas-bolivia.database.windows.net"
+		},
+		"OLP DE ORIGEN_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "erp-fuerzas-armadas-bolivia-2"
+		},
+		"OLP DE ORIGEN_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "userSisGer"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI de la cuenta de almacenamiento que contiene las plantillas de ARM vinculadas."
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Token de SAS para la cuenta de almacenamiento que contiene las plantillas de ARM vinculadas"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adf-sisger-ffaa-1258644_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"DWH destino_password": {
+						"value": "[parameters('DWH destino_password')]"
+					},
+					"OLP DE ORIGEN_password": {
+						"value": "[parameters('OLP DE ORIGEN_password')]"
+					},
+					"DWH destino_properties_typeProperties_server": {
+						"value": "[parameters('DWH destino_properties_typeProperties_server')]"
+					},
+					"DWH destino_properties_typeProperties_database": {
+						"value": "[parameters('DWH destino_properties_typeProperties_database')]"
+					},
+					"DWH destino_properties_typeProperties_userName": {
+						"value": "[parameters('DWH destino_properties_typeProperties_userName')]"
+					},
+					"OLP DE ORIGEN_properties_typeProperties_server": {
+						"value": "[parameters('OLP DE ORIGEN_properties_typeProperties_server')]"
+					},
+					"OLP DE ORIGEN_properties_typeProperties_database": {
+						"value": "[parameters('OLP DE ORIGEN_properties_typeProperties_database')]"
+					},
+					"OLP DE ORIGEN_properties_typeProperties_userName": {
+						"value": "[parameters('OLP DE ORIGEN_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adf-sisger-ffaa-1258644_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-sisger-ffaa-1258644_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adf-sisger-ffaa-1258644_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-sisger-ffaa-1258644_ArmTemplate_1')]"
+			]
+		}
+	]
+}

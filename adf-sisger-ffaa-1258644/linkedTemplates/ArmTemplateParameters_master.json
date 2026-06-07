@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-sisger-ffaa-1258644"
+		},
+		"DWH destino_password": {
+			"value": ""
+		},
+		"OLP DE ORIGEN_password": {
+			"value": ""
+		},
+		"DWH destino_properties_typeProperties_server": {
+			"value": "sql-sisger-ffaa-1258644.database.windows.net"
+		},
+		"DWH destino_properties_typeProperties_database": {
+			"value": "dw-fuerzas-armadas"
+		},
+		"DWH destino_properties_typeProperties_userName": {
+			"value": "adminffaa"
+		},
+		"OLP DE ORIGEN_properties_typeProperties_server": {
+			"value": "server02-fuerzas-armadas-bolivia.database.windows.net"
+		},
+		"OLP DE ORIGEN_properties_typeProperties_database": {
+			"value": "erp-fuerzas-armadas-bolivia-2"
+		},
+		"OLP DE ORIGEN_properties_typeProperties_userName": {
+			"value": "userSisGer"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
